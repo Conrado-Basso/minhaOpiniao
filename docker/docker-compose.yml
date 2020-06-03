@@ -1,0 +1,17 @@
+version: '3'
+services: 
+    dbcadastro:
+        image: mongo
+        environment: 
+            MONGO_INITDB_ROOT_USERNAME: minhaOpn
+            MONGO_INITDB_ROOT_PASSWORD: minhaOpn#@dev
+        ports:
+            - "27017:27017"
+        volumes:
+            - "/home/docker/minhaopiniao/dbcadastro:/data/db"
+        networks:
+            - minhaopn
+
+networks:
+    minhaopn:
+        driver: bridge
