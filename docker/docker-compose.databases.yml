@@ -11,7 +11,13 @@ services:
             - "/home/docker/minhaopiniao/dbcadastro:/data/db"
         networks:
             - minhaopn
-
-networks:
-    minhaopn:
-        driver: bridge
+    dbkong:
+        image: postgres:9.6
+        environment:
+            POSTGRES_USER: kong
+            POSTGRES_DB: kong
+            POSTGRES_PASSWORD: kong
+        ports: 
+            - "5432:5432"
+        networks: 
+            - minhaopn

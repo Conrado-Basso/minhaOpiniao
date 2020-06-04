@@ -1,0 +1,25 @@
+version: '3'
+
+services: 
+    kongMigrations:
+        image: kong:latest
+        command: kong migrations bootstrap up && kong migrations bootstrap finish
+        environment: 
+            KONG_DATABASE: postgres
+            KONG_PG_HOST: dbkong
+            KONG_PG_PASSWORD: kong
+        networks: 
+            - minhaopn
+    konga-prepare:
+        image: pantsel/konga:next
+        command: "-c prepare -a postgres -u postgresql://kong:kong@dbkong:5432/konga_db"
+        networks:
+            - minhaopn
+        restart: on-failure
+        links:
+            - dbkong
+        depends_on:
+            - dbkong
+            
+
+        
